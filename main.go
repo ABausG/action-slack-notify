@@ -24,6 +24,7 @@ const (
 	EnvHostName       = "HOST_NAME"
 	EnvMinimal        = "MSG_MINIMAL"
 	EnvSlackLinkNames = "SLACK_LINK_NAMES"
+	EnvSlackThumb 	  = "SLACK_THUMB"
 )
 
 type Webhook struct {
@@ -46,6 +47,7 @@ type Attachment struct {
 	AuthorIcon string  `json:"author_icon,omitempty"`
 	Footer     string  `json:"footer,omitempty"`
 	Fields     []Field `json:"fields,omitempty"`
+	ThumbUrl   string  `json:"thumb_url,omitempty"`
 }
 
 type Field struct {
@@ -207,6 +209,7 @@ func main() {
 				AuthorIcon: os.Getenv("GITHUB_SERVER_URL") + "/" + os.Getenv(EnvGithubActor) + ".png?size=32",
 				Footer:     envOr(EnvSlackFooter, "<https://github.com/rtCamp/github-actions-library|Powered By rtCamp's GitHub Actions Library>"),
 				Fields:     fields,
+				ThumbUrl:   envOr(EnvSlackThumb, ""),
 			},
 		},
 	}
